@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            display: block;
+        }
+
+        table, td {
+            border: 1px solid cadetblue;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <label>Number of Rows:</label>
+    <input type="text" id="satir">
+    <label>Number of Columns:</label>
+    <input type="text" id="sütun">
+    <div>
+        <br>
+    </div>
+    <label><button id="create">Create</button></label>
+    <div id="göster"></div>
+
+    <script>
+        var oluştur = document.getElementById("create");
+        oluştur.onclick = function() {
+            var sayac = 0;
+            var satır = document.getElementById("satir").value;
+            var sütun = document.getElementById("sütun").value;
+
+            var table = document.createElement("table");
+            for (var i = 0; i < satır; i++) {
+                var tr = document.createElement("tr"); //satırları oluşturan kısım
+                table.appendChild(tr);  //ekleme  allows you to dynamically create and insert new elements as children within an HTML element.
+                for (var j = 0; j < sütun; j++) {
+                    var td = document.createElement("td");
+                    td.innerHTML = sayac++;
+                    td.style.backgroundColor = getRandomColor(); // Random color applied to cell
+                    tr.appendChild(td);
+                    // trleri oluşturup tableın içine, tdleri oluşturup trnin içine dahil ettim
+                }
+            }
+
+            document.getElementById("göster").innerHTML = ""; //önce divin içini temizleyip sonra nesneyi dahil etmesi için
+            document.getElementById("göster").appendChild(table);
+
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF"; //onaltılık bir renk kodu için olası tüm karakterleri içeren, harfler adı verilen bir diziyi tanımlar. Onaltılık renk kodları, bir rengi temsil etmek için altı karakter (0-9 ve A-F) kullanır.
+            var color = "#"; // renk değişkenini "#" sembollü bir dizi olarak başlatır. Onaltılık renk kodlarında, bir renk "#" simgesi ve ardından altı karakter (kırmızı için iki, yeşil için iki ve mavi için iki karakter) ile temsil edilir.
+            for (var i = 0; i < 6; i++) {  //onaltılık bir renk kodu için gereken altı karakteri temsil eden altı kez çalışan bir döngü başlatır.
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        //Döngünün her yinelemesinde, renk değişkenine harf dizisinden rastgele bir karakter eklenir. 
+        //Math.random(), 0 (dahil) ile 1 (hariç) arasında rastgele bir sayı üretir. 0 (dahil) ile 15 (hariç) arasında bir değer elde etmek için bu rastgele sayıyı 16 ile çarpıyoruz. Math.floor(), değeri en yakın tamsayıya yuvarlar. Bu değer daha sonra harf dizisinden bir karakter seçmek için bir dizin olarak kullanılır ve etkin bir şekilde onaltılık renk kodlarında (0-9 ve A-F) kullanılan karakter kümesinden rastgele bir karakter oluşturur.
+    </script>
+</body>
+</html>
